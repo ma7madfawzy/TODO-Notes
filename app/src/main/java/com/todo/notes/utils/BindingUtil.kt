@@ -1,7 +1,5 @@
 package com.todo.notes.utils
 
-import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.text.TextWatcher
 import android.text.method.LinkMovementMethod
 import android.view.View
@@ -12,6 +10,7 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -22,9 +21,8 @@ import com.todo.notes.R
 import com.todo.notes.utils.Extensions.afterTextChanged
 import com.todo.notes.utils.Extensions.modulus
 import com.todo.notes.utils.Extensions.setRoundedBackground
+import com.todo.notes.utils.Extensions.showAlert
 import com.todo.notes.utils.Extensions.snackError
-import java.text.ParseException
-import java.text.SimpleDateFormat
 
 
 object BindingUtil {
@@ -97,15 +95,22 @@ object BindingUtil {
     @JvmStatic
     fun showAlert(view: View, message: String?) {
         message?.let {
-            val builder1 = AlertDialog.Builder(view.context)
-            builder1.setMessage(message)
-            builder1.setTitle(view.context.getString(R.string.smth_went_wrong))
-            builder1.setCancelable(true)
-            builder1.setPositiveButton(view.context.getString(R.string.ok), null)
-            val alert11 = builder1.create()
-            alert11.show()
+            view.context.showAlert(
+                view.context.getString(R.string.smth_went_wrong),
+                message, null
+            )
         }
     }
+
+    @BindingAdapter("verticalLayoutManager")
+    @JvmStatic
+    fun verticalLayoutManager(view: RecyclerView, boolean: Boolean) {
+        boolean.let {
+            view.layoutManager =
+                LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)
+        }
+    }
+
 
     @BindingAdapter("toolbar_title")
     @JvmStatic
@@ -151,22 +156,11 @@ object BindingUtil {
         }
     }
 
-    @SuppressLint("SimpleDateFormat")
-    @BindingAdapter("formatDate")
+    @BindingAdapter("pickDate_Time")
     @JvmStatic
-    //converts date in format such as "2021-06-07T14:44:06Z"
-    fun formatDate(view: TextView, text: String?) {
-        text?.let {
-            val input = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
-            val output = SimpleDateFormat("MMM dd yyyy")
-
-            try {
-                val d = input.parse(text)
-                view.text = output.format(d!!)
-            } catch (e: ParseException) {
-                e.printStackTrace()
-            }
-        }
+    fun pickDate_Time(view: TextView, show: Boolean) {
+        if (show) view
+            .setOnClickListener { DatTimePickerHandler(view) }
     }
 
     @BindingAdapter("enableCollapsing")

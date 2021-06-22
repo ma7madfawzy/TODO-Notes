@@ -1,22 +1,50 @@
-package com.example.contacts.ui.home.add_contact
+package com.todo.notes.ui.home.add_note
 
-import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import com.todo.notes.BR
+import com.todo.notes.data.model.NoteDM
+import com.todo.notes.ui.base.BaseModel
 
 /**
  * Data validation state of the add contact form.
  */
 
-class AddNoteModel : BaseObservable() {
+class AddNoteModel : BaseModel() {
+    var noteId: Long? = null
 
-    var requestError: String? = null
+    @get:Bindable
+    var dataModel: NoteDM? = null
+        set(value) {
+            field = value
+            handleUpdateCase()
+            notifyPropertyChanged(BR.dataModel)
+        }
+
+    private fun handleUpdateCase() {
+        title = dataModel?.title
+        desc = dataModel?.description
+        date = dataModel?.date
+    }
+
+    fun isUpdate() = dataModel != null
+    fun getNoteDM() = NoteDM(title, desc, date, dataModel?.id ?: noteId)
+    fun hasReminder() = date != null
+    fun saveId(result: Long) {
+        this.noteId = result
+    }
 
     @get:Bindable
     var titleError: Int? = null
         set(value) {
             field = value
             notifyPropertyChanged(BR.titleError)
+        }
+
+    @get:Bindable
+    var dateError: Int? = null
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.dateError)
         }
 
     @get:Bindable
@@ -27,10 +55,10 @@ class AddNoteModel : BaseObservable() {
         }
 
     @get:Bindable
-    var loading: Boolean? = null
+    var desc: String? = null
         set(value) {
             field = value
-            notifyPropertyChanged(BR.loading)
+            notifyPropertyChanged(BR.desc)
         }
 
     @get:Bindable
@@ -41,10 +69,10 @@ class AddNoteModel : BaseObservable() {
         }
 
     @get:Bindable
-    var desc: String? = null
+    var date: String? = null
         set(value) {
             field = value
-            notifyPropertyChanged(BR.desc)
+            notifyPropertyChanged(BR.date)
         }
 
 }

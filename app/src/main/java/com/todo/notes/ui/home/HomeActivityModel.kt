@@ -1,33 +1,12 @@
 package com.todo.notes.ui.home
 
-import androidx.databinding.BaseObservable
-import androidx.databinding.Bindable
-import com.todo.notes.BR
+import com.todo.notes.ui.base.BaseModel
 
 /**
  * Data validation state of the add contact form.
  */
 
-class HomeActivityModel : BaseObservable() {
-    fun onSuccess() {
-        messageText = null
-    }
-
+class HomeActivityModel : BaseModel() {
     var queryText: String? = ""
-    var showToast: Boolean? = false
-
-    @get:Bindable
-    var messageText: String? = null
-        set(value) {
-            field = value
-            notifyPropertyChanged(BR.messageText)
-        }
-
-    @get:Bindable
-    var loading: Boolean? = null
-        set(value) {
-            field = value
-            notifyPropertyChanged(BR.loading)
-        }
-
+    var showAlert: Boolean? = false
 }

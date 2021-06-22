@@ -1,6 +1,9 @@
 package com.todo.notes.utils
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
@@ -13,6 +16,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
+import androidx.databinding.BindingAdapter
 import com.google.android.material.snackbar.Snackbar
 import com.todo.notes.R
 import kotlinx.coroutines.CoroutineScope
@@ -61,6 +65,21 @@ object Extensions {
             awaitClose { removeTextChangedListener(listener) }
         }.onStart { emit(text) }
     }
+    fun Context.showAlert(
+        title: String? = null,
+        message: String?,
+        positiveListener: DialogInterface.OnClickListener?) {
+        message?.let {
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage(message)
+            builder.setTitle(title)
+            builder.setCancelable(true)
+            builder.setPositiveButton(getString(R.string.ok), positiveListener)
+            builder.setNegativeButton(getString(R.string.cancel), null)
+            val alert11 = builder.create()
+            alert11.show()
+        }
+    }
 
     /**
      * Extension function to set the action required on each text change with debounce
@@ -70,11 +89,16 @@ object Extensions {
     fun EditText.configDebounce(
         onEach: (String) -> Any,
         duration: Long = 700,
-        scope: CoroutineScope
+        scope: CoroutineScope,
+        ignoreFirst: Boolean = false
     ) {
+        var ignore = ignoreFirst
         textChanges().debounce(duration)
             .onEach {
-                onEach.invoke(it.toString())
+                if (ignore)
+                    ignore = false
+                else
+                    onEach.invoke(it.toString())
             }
             .launchIn(scope)
     }

@@ -3,11 +3,13 @@
     <!-- Primary brand color. -->
     <color name="colorPrimary">@color/blueLight</color>
     <color name="colorPrimaryVariant">@color/blueDark</color>
+    <!--    fits the views with primary background color-->
     <color name="colorOnPrimary">@color/grey_light</color>
 
     <!-- Secondary brand color. -->
     <color name="colorSecondary">@color/blueLight</color>
     <color name="colorSecondaryVariant">@color/blueDark</color>
+    <!--    fits the views with card background color-->
     <color name="colorOnSecondary">@color/grey_dark</color>
 
     <!-- Main colors  -->

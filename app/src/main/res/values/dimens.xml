@@ -34,7 +34,8 @@
 
     <dimen name="news_image_short_height">150dp</dimen>
     <dimen name="news_image_long_height">250dp</dimen>
-    <dimen name="news_row_overlap">-20dp</dimen>
+    <dimen name="notes_row_overlap">-10dp</dimen>
     <dimen name="default_corner_radius">8dp</dimen>
     <dimen name="add_note_min_height">@dimen/_120sdp</dimen>
+    <dimen name="corner">@dimen/_5sdp</dimen>
 </resources>

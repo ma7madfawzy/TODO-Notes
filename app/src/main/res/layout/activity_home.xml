@@ -8,8 +8,7 @@
             type="com.todo.notes.ui.home.HomeActivityViewModel" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
@@ -50,7 +49,7 @@
                     android:drawableStart="@drawable/ic_search_primary"
                     android:drawablePadding="@dimen/medium"
                     android:gravity="center_vertical"
-                    android:hint="@string/search_articles"
+                    android:hint="@string/search_news"
                     android:maxLines="1"
                     android:padding="@dimen/medium"
                     android:singleLine="true"
@@ -88,16 +87,17 @@
             android:textAppearance="@style/TEXT_LARGE"
             android:textColor="@color/colorOnSecondary"
             android:textStyle="italic"
-            app:showAlert="@{viewModel.model.showToast?viewModel.model.messageText:null}"
-            app:visibility="@{viewModel.model.messageText!=null&amp;!viewModel.model.showToast}" />
+            app:showAlert="@{viewModel.model.showAlert?viewModel.model.messageText:null}"
+            app:visibility="@{viewModel.model.messageText!=null&amp;!viewModel.model.showAlert}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             hasFixedSize="@{true}"
+            verticalLayoutManager="@{true}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_margin="@dimen/large"
+            android:layout_marginStart="@dimen/large"
+            android:layout_marginEnd="@dimen/large"
             android:layoutAnimation="@anim/slide_in_animation"
             app:behavior_overlapTop="@dimen/overlap"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
@@ -108,13 +108,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
             android:backgroundTint="@color/colorPrimary"
+            android:contentDescription="@string/add_new_note"
+            android:onClick="onAddNoteClicked"
             app:borderWidth="0dp"
             app:elevation="1dp"
-            android:onClick="onAddNoteClicked"
             app:layout_anchor="@id/recycler"
             app:layout_anchorGravity="bottom|end"
-            app:rippleColor="@color/colorPrimaryVariant"
-            android:contentDescription="@string/add_new_note" />
+            app:rippleColor="@color/colorPrimaryVariant" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -122,7 +122,7 @@
             android:elevation="6dp"
             android:text="+"
             android:textColor="@color/white"
-            android:textSize="@dimen/largest_text_size"
+            android:textAppearance="@style/TEXT_HUGE"
             android:textStyle="bold"
             app:layout_anchor="@id/fab"
             app:layout_anchorGravity="center" />

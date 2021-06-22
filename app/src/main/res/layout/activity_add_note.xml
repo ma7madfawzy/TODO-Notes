@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.contacts.ui.home.add_contact.AddNoteViewModel" />
+            type="com.todo.notes.ui.home.add_note.AddNoteViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -48,6 +48,7 @@
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
+                    toolbar_title="@{viewModel.model.update?@string/add_new_note:``}"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:collapseIcon="@drawable/ic_note"
@@ -58,93 +59,127 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/container"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/large"
             android:layout_marginEnd="@dimen/large"
-            android:clipToPadding="false"
-            android:transitionName="@string/transition"
             app:behavior_overlapTop="@dimen/small_overlap"
-            app:cardBackgroundColor="@color/card_color"
-            app:cardCornerRadius="@dimen/large"
-            app:cardElevation="1dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
-            <LinearLayout
+            <androidx.cardview.widget.CardView
+                android:id="@+id/container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
-                android:orientation="vertical">
+                android:transitionName="@string/transition"
+                app:cardBackgroundColor="@color/card_color"
+                app:cardCornerRadius="@dimen/large"
+                app:cardElevation="1dp">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/note_title_holder"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    error="@{viewModel.model.titleError==null?0:viewModel.model.titleError}"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/small"
-                    android:paddingTop="@dimen/large"
-                    android:paddingBottom="@dimen/large"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:orientation="vertical">
 
-                    <androidx.appcompat.widget.AppCompatEditText
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/note_title_holder"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        error="@{viewModel.model.titleError==null?0:viewModel.model.titleError}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/xxxLarge"
-                        android:layout_marginEnd="@dimen/xxxLarge"
-                        android:hint="@string/note_title"
-                        android:inputType="textEmailAddress"
-                        android:selectAllOnFocus="true"
-                        android:text="@={viewModel.model.title}" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_margin="@dimen/small"
+                        android:paddingTop="@dimen/large"
+                        android:paddingBottom="@dimen/large"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/phone_holder"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                    error="@{viewModel.model.descError==null?0:viewModel.model.descError}"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/small"
-                    android:paddingTop="@dimen/large"
-                    android:paddingBottom="@dimen/large"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/note_title_holder">
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/xxxLarge"
+                            android:layout_marginEnd="@dimen/xxxLarge"
+                            android:hint="@string/note_title"
+                            android:inputType="textEmailAddress"
+                            android:selectAllOnFocus="true"
+                            android:text="@={viewModel.model.title}" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/phone_et"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/note_date_holder"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        error="@{viewModel.model.titleError==null?0:viewModel.model.titleError}"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="24dp"
-                        android:hint="@string/note_desc"
-                        android:imeOptions="actionDone"
-                        android:minHeight="@dimen/add_note_min_height"
-                        android:selectAllOnFocus="true"
-                        android:text="@={viewModel.model.desc}" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/small"
+                        android:focusableInTouchMode="false"
+                        android:paddingTop="@dimen/large"
+                        android:paddingBottom="@dimen/large"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:startIconDrawable="@drawable/ic_alarm">
 
-                <ProgressBar
-                    android:id="@+id/loading"
-                    snackString="@{viewModel.model.requestError==null?null:viewModel.model.requestError}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:visibility="@{viewModel.model.loading?View.VISIBLE:View.GONE}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/phone_holder"
-                    app:layout_constraintStart_toStartOf="@+id/phone_holder"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </LinearLayout>
+                        <androidx.appcompat.widget.AppCompatEditText
+                            pickDate_Time="@{true}"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/xxxLarge"
+                            android:layout_marginEnd="@dimen/xxxLarge"
+                            android:focusable="false"
+                            android:hint="@string/reminder"
+                            android:selectAllOnFocus="true"
+                            android:text="@={viewModel.model.date}" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-        </androidx.cardview.widget.CardView>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/phone_holder"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                        error="@{viewModel.model.descError==null?0:viewModel.model.descError}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/small"
+                        android:paddingTop="@dimen/large"
+                        android:paddingBottom="@dimen/large"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/note_title_holder">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/phone_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/medium"
+                            android:layout_marginTop="@dimen/small"
+                            android:layout_marginEnd="@dimen/medium"
+                            android:hint="@string/note_desc"
+                            android:imeOptions="actionDone"
+                            android:inputType="textMultiLine"
+                            android:minHeight="@dimen/add_note_min_height"
+                            android:selectAllOnFocus="true"
+                            android:text="@={viewModel.model.desc}" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ProgressBar
+                        android:id="@+id/loading"
+                        snackString="@{viewModel.model.messageText==null?null:viewModel.model.messageText}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="@{viewModel.model.loading?View.VISIBLE:View.GONE}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/phone_holder"
+                        app:layout_constraintStart_toStartOf="@+id/phone_holder"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+        </ScrollView>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

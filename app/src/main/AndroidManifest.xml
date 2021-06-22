@@ -18,22 +18,25 @@
             android:name="com.todo.notes.ui.home.HomeActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.TodoNotes.NoActionBar">
-
-        </activity>
-        <activity
-            android:name="com.todo.notes.ui.home.details.DetailsActivity"
-            android:label=""
-            android:theme="@style/Theme.TodoNotes.NoActionBar" />
-        <activity
-            android:name="com.example.contacts.ui.home.add_contact.AddNoteActivity"
-            android:label="@string/add_new_note"
-            android:theme="@style/Theme.TodoNotes.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.todo.notes.ui.home.details.DetailsActivity"
+            android:label=""
+            android:theme="@style/Theme.TodoNotes.NoActionBar" />
+        <activity
+            android:name=".ui.home.add_note.AddNoteActivity"
+            android:label="@string/add_new_note"
+            android:theme="@style/Theme.TodoNotes.NoActionBar"></activity>
+
+        <receiver
+            android:name=".broadcast.ReminderReceiver"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

@@ -1,11 +1,13 @@
 package com.todo.notes.ui.base
 
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.todo.notes.BR
+import com.todo.notes.broadcast.ReminderReceiver
 import com.todo.notes.di.modules.ViewModelFactory
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.coroutines.CoroutineScope
@@ -13,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelChildren
 import javax.inject.Inject
+
 
 abstract class BaseActivity<VM : BaseViewModel, B : ViewDataBinding> : DaggerAppCompatActivity() {
     @Inject
@@ -28,6 +31,9 @@ abstract class BaseActivity<VM : BaseViewModel, B : ViewDataBinding> : DaggerApp
         initViewModel()
         inflateBinding()
         setupViews()
+        val receiver = ReminderReceiver()
+        val filter = IntentFilter("ALARM_ACTION")
+        registerReceiver(receiver, filter)
     }
 
     private fun initViewModel() {

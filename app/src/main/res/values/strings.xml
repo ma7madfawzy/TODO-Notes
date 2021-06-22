@@ -4,6 +4,7 @@
     <string name="call_permission_clarification">Permission to access the microphone is required for this app to make calls.</string>
     <string name="permission_required">Permission required</string>
     <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
     <string name="permission_denied">Permission Denied !</string>
     <string name="call_action_cancelled">Call Action Cancelled</string>
 
@@ -20,14 +21,19 @@
     <string name="retry">Retry</string>
     <string name="emptyData">Try different search</string>
     <string name="noDataFound">No Data Found !!</string>
-    <string name="search_articles">search articles…</string>
+    <string name="search_news">search TODOs…</string>
     <string name="source">Source: </string>
     <string name="smth_went_wrong">Something went wrong</string>
     <string name="edit">Edit</string>
     <string name="add_new_note">Add new note</string>
     <string name="invalid_data">Invalid data</string>
-    <string name="note_added_successfully">Note * added successfully</string>
+    <string name="note_added_successfully">Note * was saved successfully</string>
     <string name="note_title">Note title</string>
-    <string name="note_desc">describtion...</string>
+    <string name="note_desc">describtion…</string>
     <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="future_time_only">Only future time alowed\tPlease try again with a future timing</string>
+    <string name="reminder">Reminder</string>
+    <string name="sure_delete_note">Delete * ?</string>
+    <string name="alarm_set">Reminder set on *</string>
 </resources>

@@ -1,6 +1,6 @@
 package com.todo.notes.di.modules
 
-import com.example.contacts.ui.home.add_contact.AddNoteActivity
+import com.todo.notes.ui.home.add_note.AddNoteActivity
 import com.todo.notes.ui.home.HomeActivity
 import com.todo.notes.ui.home.details.DetailsActivity
 import dagger.Module

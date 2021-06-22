@@ -2,7 +2,7 @@ package com.todo.notes.di.modules
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.contacts.ui.home.add_contact.AddNoteViewModel
+import com.todo.notes.ui.home.add_note.AddNoteViewModel
 import com.todo.notes.di.annotations.ViewModelKey
 import com.todo.notes.ui.home.HomeActivityViewModel
 import com.todo.notes.ui.home.details.DetailsViewModel

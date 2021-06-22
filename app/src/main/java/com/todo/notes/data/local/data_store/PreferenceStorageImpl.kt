@@ -21,11 +21,11 @@ class PreferenceStorage @Inject constructor(context: Context) : PreferencesStora
 
     //preference keys
     private object PreferencesKeys {
-        val SAVED_KEY = booleanPreferencesKey("saved_key")
+        val SAVED_KEY = booleanPreferencesKey("hasNotes")
     }
 
     //get saved key
-    override suspend fun savedKey() = dataStore.data.catch {
+    override suspend fun hasNotes() = dataStore.data.catch {
         if (it is IOException) {
             emit(emptyPreferences())
         } else {
@@ -36,7 +36,7 @@ class PreferenceStorage @Inject constructor(context: Context) : PreferencesStora
     }
 
     //set saved key
-    override suspend fun setSavedKey(order: Boolean) {
+    override suspend fun setHasNotes(order: Boolean) {
         dataStore.edit {
             it[PreferencesKeys.SAVED_KEY] = order
         }

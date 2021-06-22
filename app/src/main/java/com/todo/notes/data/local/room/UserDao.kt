@@ -12,20 +12,25 @@ interface UserDao {
     /**
      * CREATE
      */
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert
     suspend fun insertNote(note: NoteDM): Long
 
     /**
      * READ
      */
     @Transaction
-    @Query("SELECT * FROM user_notes ORDER BY id DESC")
-     fun fetchNotes(): Flow<List<NoteDM>>
+    @Query("SELECT * FROM user_notes")
+    fun fetchNotes(): Flow<List<NoteDM>>
+
+    //get all notes with searched text title/desc
+    @Transaction
+    @Query("SELECT * FROM user_notes WHERE title LIKE :searchText || description LIKE :searchText ")
+    fun fetchNotes(searchText: String): Flow<List<NoteDM>>
 
     //get single note inserted to room database
     @Transaction
-    @Query("SELECT * FROM user_notes WHERE id = :id ORDER BY id DESC")
-    fun fetchNote(id: Long): Flow<NoteDM>
+    @Query("SELECT * FROM user_notes WHERE id = :id")
+    fun fetchNote(id: Int): Flow<NoteDM>
 
     /**
      * UPDATE
@@ -37,7 +42,7 @@ interface UserDao {
      * DELETE
      */
     @Query("DELETE FROM user_notes WHERE id = :id")
-    suspend fun deleteNote(id: Long)
+    suspend fun deleteNote(id: kotlin.Long?)
 
     //delete all note details
     @Delete

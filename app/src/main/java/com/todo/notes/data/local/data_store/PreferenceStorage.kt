@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface PreferencesStorage {
 
-    suspend fun savedKey() : Flow<Boolean>
-    suspend fun setSavedKey(order: Boolean)
+    suspend fun hasNotes() : Flow<Boolean>
+    suspend fun setHasNotes(order: Boolean)
 
 }

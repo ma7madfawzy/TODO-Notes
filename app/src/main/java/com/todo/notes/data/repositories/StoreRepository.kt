@@ -4,7 +4,7 @@ import com.todo.notes.data.local.data_store.PreferenceStorage
 import javax.inject.Inject
 
 class StoreRepository @Inject constructor(private val preferenceStorage: PreferenceStorage) {
-    suspend fun savedKey() = preferenceStorage.savedKey()
+    suspend fun hasNotes() = preferenceStorage.hasNotes()
 
-    suspend fun setSavedKey(order: Boolean) = preferenceStorage.setSavedKey(order)
+    suspend fun setHasNotes(value: Boolean) = preferenceStorage.setHasNotes(value)
 }
