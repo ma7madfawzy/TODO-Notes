@@ -23,4 +23,11 @@
     <string name="search_articles">search articles…</string>
     <string name="source">Source: </string>
     <string name="smth_went_wrong">Something went wrong</string>
+    <string name="edit">Edit</string>
+    <string name="add_new_note">Add new note</string>
+    <string name="invalid_data">Invalid data</string>
+    <string name="note_added_successfully">Note * added successfully</string>
+    <string name="note_title">Note title</string>
+    <string name="note_desc">describtion...</string>
+    <string name="save">Save</string>
 </resources>

@@ -2,7 +2,7 @@ package com.todo.notes.utils
 
 object ValidationUtils {
     // A placeholder contact name validation check
-    fun isFullNameValid(string: String?): Boolean {
+    fun isValidContentData(string: String?): Boolean {
         return (string!=null&&string.isNotBlank())
     }
 

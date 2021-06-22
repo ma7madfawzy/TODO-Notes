@@ -10,150 +10,82 @@
             type="com.todo.notes.ui.home.details.DetailsViewModel" />
     </data>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clipChildren="false"
-        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         android:transitionName="@string/transition">
 
-        <ImageView
-            android:id="@+id/iv"
-            url_src="@{viewModel.model.dataModel.urlToImage}"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/news_image_long_height"
-            android:layout_alignParentTop="true"
-            android:alpha="0.8"
-            android:scaleType="centerCrop"
-            android:tag="@{viewModel.model.dataModel.urlToImage}" />
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_alignParentTop="true"
-            android:background="@color/transparent"
-            app:popupTheme="@style/Theme.TempoNews.PopupOverlay"
-            app:title="" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card"
-            snack="@{viewModel.model.requestError==null?null:viewModel.model.requestError}"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/iv"
-            android:layout_marginStart="@dimen/large"
-            android:layout_marginTop="@dimen/news_row_overlap"
-            android:layout_marginEnd="@dimen/large"
-            android:layout_marginBottom="@dimen/large"
-            android:clipToPadding="false"
-            android:padding="@dimen/large"
-            app:cardBackgroundColor="@color/card_color"
-            app:cardCornerRadius="@dimen/large"
-            app:cardElevation="1dp">
+            android:fitsSystemWindows="true"
+            android:theme="@style/Theme.TodoNotes.AppBarOverlay">
 
-            <ScrollView
-                android:id="@+id/container"
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/toolbar_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="@dimen/app_bar_height"
+                android:background="@color/colorPrimaryVariant"
+                android:fitsSystemWindows="true"
+                app:contentScrim="@color/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:toolbarId="@+id/toolbar">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/medium">
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="none"
+                    app:popupTheme="@style/Theme.TodoNotes.PopupOverlay"
+                    app:titleTextColor="@color/colorPrimary"
+                    app:toolbar_title="@{viewModel.model.dataModel.title}" />
 
-                    <TextView
-                        android:id="@+id/title_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{viewModel.model.dataModel.title}"
-                        android:textColor="@color/colorOnSecondary"
-                        android:textSize="@dimen/large_text_size"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
-                    <TextView
-                        android:id="@+id/date_tv"
-                        formatDate="@{viewModel.model.dataModel.publishedAt}"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/medium"
-                        android:layout_marginEnd="@dimen/medium"
-                        android:textColor="@color/colorSecondary"
-                        android:textSize="@dimen/large_text_size"
-                        android:textStyle="italic"
-                        app:drawableStartCompat="@drawable/ic_date"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/title_tv" />
+        <ScrollView
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/medium"
+            android:layout_height="wrap_content"
+            app:behavior_overlapTop="@dimen/overlap"
+            android:layoutAnimation="@anim/slide_in_animation"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                    <TextView
-                        android:id="@+id/desc_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/medium"
-                        android:text="@{viewModel.model.dataModel.description}"
-                        android:textColor="@color/colorOnSecondary"
-                        android:textSize="@dimen/medium_text_size"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/date_tv" />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/large"
+                android:layout_marginEnd="@dimen/large"
+                android:clipToPadding="false"
+                app:cardBackgroundColor="@color/card_color"
+                app:cardCornerRadius="@dimen/large"
+                app:cardElevation="1dp">
 
-                    <TextView
-                        android:id="@+id/content_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/large_margin"
-                        android:layout_marginBottom="@dimen/medium"
-                        android:lineSpacingExtra="@dimen/xSmall"
-                        android:text="@{viewModel.model.dataModel.content}"
-                        android:textColor="@color/colorOnSecondary"
-                        android:textSize="@dimen/large_text_size"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/desc_tv" />
+                <TextView
+                    android:id="@+id/desc_tv"
+                    android:lineSpacingExtra="@dimen/medium"
+                    android:layout_width="match_parent"
+                    android:layout_margin="@dimen/medium"
+                    android:layout_height="match_parent"
+                    android:text="@{viewModel.model.dataModel.description}"
+                    android:textColor="@color/colorOnSecondary"
+                    android:textSize="@dimen/medium_text_size" />
+            </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:id="@+id/author_tv"
-                        linksClickable="@{viewModel.model.dataModel.author}"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:autoLink="web"
-                        android:layout_marginStart="@dimen/medium"
-                        android:layout_marginTop="@dimen/medium"
-                        android:text="@{viewModel.model.dataModel.author}"
-                        android:textColor="@color/colorSecondary"
-                        android:textSize="@dimen/large_text_size"
-                        android:textStyle="italic"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/content_tv"
-                        app:visibility="@{viewModel.model.dataModel.author!=null}" />
-
-                    <TextView
-                        android:id="@+id/source_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/medium"
-                        android:layout_marginEnd="@dimen/medium"
-                        android:text="@{@string/source+``+viewModel.model.dataModel.source.name}"
-                        android:textColor="@color/colorSecondary"
-                        android:textSize="@dimen/large_text_size"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/author_tv" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </ScrollView>
-        </androidx.cardview.widget.CardView>
-
+        </ScrollView>
 
         <ProgressBar
-            android:id="@+id/loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:id="@+id/progress"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
             android:layout_gravity="center"
+            android:progressTint="@color/colorSecondaryVariant"
+            app:showAlert="@{viewModel.model.requestError}"
             app:visibility="@{viewModel.model.loading}" />
-    </RelativeLayout>
-
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

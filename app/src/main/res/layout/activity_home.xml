@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -8,7 +8,7 @@
             type="com.todo.notes.ui.home.HomeActivityViewModel" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
-            android:theme="@style/Theme.TempoNews.AppBarOverlay">
+            android:theme="@style/Theme.TodoNotes.AppBarOverlay">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/toolbar_layout"
@@ -37,9 +37,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="none"
-                    app:toolbar_title="@{``}"
-                    app:popupTheme="@style/Theme.TempoNews.PopupOverlay"
-                    app:titleTextColor="@color/colorPrimary" />
+                    app:popupTheme="@style/Theme.TodoNotes.PopupOverlay"
+                    app:titleTextColor="@color/colorPrimary"
+                    app:toolbar_title="@{``}" />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/searchEt"
@@ -81,7 +81,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            app:showAlert="@{viewModel.model.showToast?viewModel.model.messageText:null}"
             android:gravity="center"
             android:lineSpacingExtra="@dimen/medium"
             android:text="@{viewModel.model.messageText}"
@@ -89,6 +88,7 @@
             android:textAppearance="@style/TEXT_LARGE"
             android:textColor="@color/colorOnSecondary"
             android:textStyle="italic"
+            app:showAlert="@{viewModel.model.showToast?viewModel.model.messageText:null}"
             app:visibility="@{viewModel.model.messageText!=null&amp;!viewModel.model.showToast}" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -100,8 +100,32 @@
             android:layout_margin="@dimen/large"
             android:layoutAnimation="@anim/slide_in_animation"
             app:behavior_overlapTop="@dimen/overlap"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-           />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:backgroundTint="@color/colorPrimary"
+            app:borderWidth="0dp"
+            app:elevation="1dp"
+            android:onClick="onAddNoteClicked"
+            app:layout_anchor="@id/recycler"
+            app:layout_anchorGravity="bottom|end"
+            app:rippleColor="@color/colorPrimaryVariant"
+            android:contentDescription="@string/add_new_note" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="6dp"
+            android:text="+"
+            android:textColor="@color/white"
+            android:textSize="@dimen/largest_text_size"
+            android:textStyle="bold"
+            app:layout_anchor="@id/fab"
+            app:layout_anchorGravity="center" />
 
         <ProgressBar
             android:id="@+id/progress"

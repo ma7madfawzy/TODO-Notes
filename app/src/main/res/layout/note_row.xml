@@ -16,79 +16,59 @@
             type="com.todo.notes.data.model.NoteDM" />
     </data>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clipChildren="false"
-        android:orientation="vertical">
+        android:layout_margin="@dimen/large"
+        android:clipToPadding="false"
+        android:padding="@dimen/row_card_padding"
+        app:cardCornerRadius="@dimen/medium"
+        app:cardElevation="1dp">
 
-        <com.todo.notes.ui.custom_views.CorneredImageView
-            android:id="@+id/iv"
-            url_src="@{dataModel.urlToImage}"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/news_image_short_height"
+        <com.todo.notes.ui.custom_views.CircularTextView
+            android:id="@+id/icon_iv"
+            firstChar="@{dataModel.title}"
+            random_color_background="@{position}"
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_width"
+            android:layout_gravity="start|center_vertical"
+            android:layout_margin="@dimen/medium"
             android:elevation="1dp"
-            android:maxHeight="@dimen/news_image_short_height"
-            android:scaleType="centerCrop" />
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/large_text_size"
+            android:textStyle="bold" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/container"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/iv"
-            android:layout_marginStart="@dimen/large"
-            android:layout_marginTop="@dimen/news_row_overlap"
-            android:layout_marginEnd="@dimen/large"
-            android:layout_marginBottom="@dimen/large"
-            android:clipToPadding="false"
-            android:padding="@dimen/contact_row_card_padding"
-            app:cardCornerRadius="@dimen/medium"
-            app:cardElevation="1dp">
+            android:layout_gravity="start|center_vertical"
+            android:layout_margin="@dimen/medium"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/note_title_margin"
+            android:paddingEnd="@dimen/note_title_margin">
 
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/medium">
+                android:clickable="false"
+                android:text="@{dataModel.title}"
+                android:textAppearance="@style/TEXT_LARGE"
+                android:textColor="@color/colorOnSecondary"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/title_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{dataModel.title}"
-                    android:textColor="@color/colorOnSecondary"
-                    android:textSize="@dimen/large_text_size"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:maxLines="2"
+                android:text="@{dataModel.description}"
+                android:textAppearance="@style/TEXT_MEDIUM"
+                android:textColor="@color/colorOnSecondary" />
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/desc_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{dataModel.description}"
-                    android:textColor="@color/colorOnSecondary"
-                    android:textSize="@dimen/medium_text_size"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/title_tv" />
-
-                <TextView
-                    android:id="@+id/date_tv"
-                    formatDate="@{dataModel.publishedAt}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/medium"
-                    android:layout_marginEnd="@dimen/medium"
-                    android:textColor="@color/colorSecondary"
-                    android:textSize="@dimen/large_text_size"
-                    android:textStyle="italic"
-                    app:drawableStartCompat="@drawable/ic_date"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/desc_tv" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-    </RelativeLayout>
-
+    </androidx.cardview.widget.CardView>
 
 </layout>

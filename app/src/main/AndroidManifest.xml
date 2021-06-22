@@ -13,21 +13,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TempoNews">
+        android:theme="@style/Theme.TodoNotes">
         <activity
             android:name="com.todo.notes.ui.home.HomeActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.TempoNews.NoActionBar">
+            android:theme="@style/Theme.TodoNotes.NoActionBar">
+
+        </activity>
+        <activity
+            android:name="com.todo.notes.ui.home.details.DetailsActivity"
+            android:label=""
+            android:theme="@style/Theme.TodoNotes.NoActionBar" />
+        <activity
+            android:name="com.example.contacts.ui.home.add_contact.AddNoteActivity"
+            android:label="@string/add_new_note"
+            android:theme="@style/Theme.TodoNotes.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.todo.notes.ui.home.details.DetailsActivity"
-            android:label=""
-            android:theme="@style/Theme.TempoNews.NoActionBar" />
     </application>
 
 </manifest>

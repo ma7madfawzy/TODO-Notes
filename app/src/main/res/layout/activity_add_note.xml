@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.example.contacts.ui.home.add_contact.AddNoteViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:layoutAnimation="@anim/slide_up_animation"
+        tools:context=".ui.home.Add">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_bar_height_long"
+            android:fitsSystemWindows="true"
+            android:theme="@style/Theme.TodoNotes.AppBarOverlay">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimaryVariant"
+                android:fitsSystemWindows="true"
+                app:contentScrim="@color/colorPrimary"
+                app:expandedTitleGravity="bottom"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:toolbarId="@+id/toolbar">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal|top"
+                    android:layout_marginBottom="@dimen/xxxLarge"
+                    android:padding="@dimen/xxxLarge"
+                    android:src="@drawable/ic_note"
+                    app:layout_collapseMode="parallax" />
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:collapseIcon="@drawable/ic_note"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/Theme.TodoNotes.PopupOverlay"
+                    app:titleTextColor="@color/colorPrimary" />
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/large"
+            android:layout_marginEnd="@dimen/large"
+            android:clipToPadding="false"
+            android:transitionName="@string/transition"
+            app:behavior_overlapTop="@dimen/small_overlap"
+            app:cardBackgroundColor="@color/card_color"
+            app:cardCornerRadius="@dimen/large"
+            app:cardElevation="1dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/note_title_holder"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    error="@{viewModel.model.titleError==null?0:viewModel.model.titleError}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/small"
+                    android:paddingTop="@dimen/large"
+                    android:paddingBottom="@dimen/large"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/xxxLarge"
+                        android:layout_marginEnd="@dimen/xxxLarge"
+                        android:hint="@string/note_title"
+                        android:inputType="textEmailAddress"
+                        android:selectAllOnFocus="true"
+                        android:text="@={viewModel.model.title}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/phone_holder"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                    error="@{viewModel.model.descError==null?0:viewModel.model.descError}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/small"
+                    android:paddingTop="@dimen/large"
+                    android:paddingBottom="@dimen/large"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/note_title_holder">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/phone_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="24dp"
+                        android:hint="@string/note_desc"
+                        android:imeOptions="actionDone"
+                        android:minHeight="@dimen/add_note_min_height"
+                        android:selectAllOnFocus="true"
+                        android:text="@={viewModel.model.desc}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ProgressBar
+                    android:id="@+id/loading"
+                    snackString="@{viewModel.model.requestError==null?null:viewModel.model.requestError}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="@{viewModel.model.loading?View.VISIBLE:View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/phone_holder"
+                    app:layout_constraintStart_toStartOf="@+id/phone_holder"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

@@ -2,12 +2,14 @@ package com.todo.notes.utils
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
 import androidx.annotation.CheckResult
+import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
@@ -59,6 +61,7 @@ object Extensions {
             awaitClose { removeTextChangedListener(listener) }
         }.onStart { emit(text) }
     }
+
     /**
      * Extension function to set the action required on each text change with debounce
      */
@@ -76,6 +79,32 @@ object Extensions {
             .launchIn(scope)
     }
 
+    infix fun Int.modulus(other: Int) = ((this % other) + other) % other
+    fun View.setRoundedBackground(@ColorInt color: Int) {
+        addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
+            override fun onLayoutChange(
+                v: View?,
+                left: Int,
+                top: Int,
+                right: Int,
+                bottom: Int,
+                oldLeft: Int,
+                oldTop: Int,
+                oldRight: Int,
+                oldBottom: Int
+            ) {
+
+                val shape = GradientDrawable()
+                shape.cornerRadius = measuredHeight / 2f
+                shape.setColor(color)
+
+                background = shape
+
+                removeOnLayoutChangeListener(this)
+            }
+        })
+    }
+
     /**
      * Extension function to simplify showing a snackBar using the View.
      */
@@ -87,18 +116,18 @@ object Extensions {
         errorString?.let { Snackbar.make(this, it, Snackbar.LENGTH_SHORT).show() }
     }
 
-    fun Activity.startActivity(viewToAnimate: View, cls: Class<*>, extras: Bundle) {
+    fun Activity.startActivity(viewToAnimate: View, cls: Class<*>, extras: Bundle? = null) {
         val intent = Intent(this, cls)
-        intent.putExtras(extras)
+        extras?.let { intent.putExtras(it) }
         val options: ActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
             this, viewToAnimate, this.getString(R.string.transition)
         )
         ActivityCompat.startActivity(this, intent, options.toBundle())
     }
 
-    fun Activity.startActivity(cls: Class<*>, extras: Bundle, finish: Boolean = false) {
+    fun Activity.startActivity(cls: Class<*>, extras: Bundle? = null, finish: Boolean = false) {
         val intent = Intent(this, cls)
-        intent.putExtras(extras)
+        extras?.let { intent.putExtras(it) }
         this.startActivity(intent)
         if (finish)
             this.finish()

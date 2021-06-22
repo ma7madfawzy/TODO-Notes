@@ -2,7 +2,8 @@ package com.todo.notes.ui.home.details
 
 import android.app.Activity
 import android.os.Bundle
-import android.view.View
+import android.view.Menu
+import android.view.MenuItem
 import androidx.core.app.ActivityCompat
 import com.todo.notes.R
 import com.todo.notes.data.model.NoteDM
@@ -14,10 +15,10 @@ import com.todo.notes.utils.Extensions.startActivity
 class DetailsActivity : BaseActivity<DetailsViewModel, ActivityNoteDetailsBinding>() {
 
     companion object {
-        fun start(activity: Activity, view: View, noteDm: NoteDM?) {
+        fun start(activity: Activity, noteDm: NoteDM?) {
             val extras = Bundle()
-            extras.putParcelable("dataModel", noteDm)
-            activity.startActivity(view, DetailsActivity::class.java, extras)
+//            extras.putParcelable("dataModel", noteDm)
+            activity.startActivity(DetailsActivity::class.java, extras)
         }
     }
 
@@ -42,6 +43,22 @@ class DetailsActivity : BaseActivity<DetailsViewModel, ActivityNoteDetailsBindin
 
     override fun onBackPressed() {
         ActivityCompat.finishAfterTransition(this)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_details, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_edit -> {
+
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun getLayoutRes() = R.layout.activity_note_details

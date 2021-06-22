@@ -3,12 +3,15 @@ package com.todo.notes.ui.home
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.contacts.ui.home.add_contact.AddNoteActivity
 import com.todo.notes.R
 import com.todo.notes.databinding.ActivityHomeBinding
 import com.todo.notes.ui.base.BaseActivity
 import com.todo.notes.utils.Extensions.configDebounce
+import com.todo.notes.utils.Extensions.startActivity
 import com.todo.notes.utils.ThemeDialogHandler
 import javax.inject.Inject
 
@@ -17,6 +20,7 @@ class HomeActivity : BaseActivity<HomeActivityViewModel, ActivityHomeBinding>() 
 
 
     private lateinit var notesAdapter: NotesAdapter
+
     @Inject
     lateinit var themeHandlerDialog: ThemeDialogHandler
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,5 +88,9 @@ class HomeActivity : BaseActivity<HomeActivityViewModel, ActivityHomeBinding>() 
     override fun getLayoutRes() = R.layout.activity_home
 
     override fun getViewModelClass() = HomeActivityViewModel::class.java
+
+    fun onAddNoteClicked(view: View) {
+        startActivity(AddNoteActivity::class.java)
+    }
 
 }

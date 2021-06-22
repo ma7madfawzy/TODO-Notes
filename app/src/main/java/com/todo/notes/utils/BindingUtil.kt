@@ -5,7 +5,10 @@ import android.app.AlertDialog
 import android.text.TextWatcher
 import android.text.method.LinkMovementMethod
 import android.view.View
-import android.widget.*
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.BindingAdapter
@@ -17,6 +20,8 @@ import com.google.android.material.shape.CornerFamily
 import com.google.android.material.textfield.TextInputLayout
 import com.todo.notes.R
 import com.todo.notes.utils.Extensions.afterTextChanged
+import com.todo.notes.utils.Extensions.modulus
+import com.todo.notes.utils.Extensions.setRoundedBackground
 import com.todo.notes.utils.Extensions.snackError
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -51,17 +56,34 @@ object BindingUtil {
         }
     }
 
+    @BindingAdapter("firstChar")
+    @JvmStatic
+    fun firstChar(view: TextView, text: String?) {
+        text?.let {
+            view.text = text.toCharArray()[0].toUpperCase().toString()
+        }
+    }
 
-    @BindingAdapter("snack_error")
+    @BindingAdapter("snack_int")
     @JvmStatic
     fun snackError(view: View, @StringRes message: Int) {
         if (message != 0)
             view.snackError(message)
     }
 
-    @BindingAdapter("snack")
+    @BindingAdapter("random_color_background")
     @JvmStatic
-    fun snackError(view: View, s: String?) {
+    fun randomColorBackground(view: View, position: Int?) {
+        //get position based color index
+        val rainbow = view.context.resources.getIntArray(com.todo.notes.R.array.rainbow)
+        //@Int.modulus is an extension function located in Extensions object in utils help with the modulus operation
+        val index = position?.modulus(rainbow.size)
+        view.setRoundedBackground(rainbow[index!!])
+    }
+
+    @BindingAdapter("snackString")
+    @JvmStatic
+    fun snackString(view: View, s: String?) {
         s?.let { view.snackError(s) }
     }
 
@@ -88,7 +110,7 @@ object BindingUtil {
     @BindingAdapter("toolbar_title")
     @JvmStatic
     fun toolbar_title(view: Toolbar, title: String?) {
-        view.title = title?:""
+        view.title = title ?: ""
     }
 
     @BindingAdapter("url_src")
@@ -105,7 +127,7 @@ object BindingUtil {
 
     @BindingAdapter("round_corners")
     @JvmStatic
-    fun round_corners(imageView: ShapeableImageView, round_corners: Boolean) {
+    fun roundCorners(imageView: ShapeableImageView, round_corners: Boolean) {
         if (!round_corners) return
         val radius = imageView.context.resources.getDimension(R.dimen.default_corner_radius)
         imageView.shapeAppearanceModel = imageView.shapeAppearanceModel

@@ -23,13 +23,11 @@
     <dimen name="larger_text_size">20sp</dimen>
     <dimen name="largest_text_size">24sp</dimen>
 
-    <dimen name="call_icon_width">25dp</dimen>
-    <dimen name="delete_icon_width">50dp</dimen>
-    <dimen name="contact_icon_width">40dp</dimen>
-    <!--    it must be more than to leave space-->
-    <dimen name="contact_name_margin">50dp</dimen>
 
-    <dimen name="contact_row_card_padding">@dimen/medium</dimen>
+    <dimen name="row_card_padding">@dimen/medium</dimen>
+    <dimen name="icon_width">@dimen/_35sdp</dimen>
+    <!--    it must be more than contact_icon_width to leave space-->
+    <dimen name="note_title_margin">@dimen/_45sdp</dimen>
 
     <dimen name="overlap">35dp</dimen>
     <dimen name="small_overlap">24dp</dimen>
@@ -38,4 +36,5 @@
     <dimen name="news_image_long_height">250dp</dimen>
     <dimen name="news_row_overlap">-20dp</dimen>
     <dimen name="default_corner_radius">8dp</dimen>
+    <dimen name="add_note_min_height">@dimen/_120sdp</dimen>
 </resources>

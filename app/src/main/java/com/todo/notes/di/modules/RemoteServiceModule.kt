@@ -1,8 +1,5 @@
 package com.todo.notes.di.modules
 
-import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
-import com.todo.notes.R
 import com.todo.notes.data.api.ApiService
 import com.todo.notes.utils.Constants
 import dagger.Module
@@ -59,10 +56,4 @@ class RemoteServiceModule {
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         return loggingInterceptor
     }
-
-    @Provides
-    fun providePrefrences(context: Context) = context.getSharedPreferences(
-        context.getString(R.string.app_name),
-        AppCompatActivity.MODE_PRIVATE
-    )
 }

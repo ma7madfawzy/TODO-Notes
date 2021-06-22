@@ -19,7 +19,6 @@ open class NotesAdapter(
         holder?.binding?.root?.setOnClickListener { v ->
             DetailsActivity.start(
                 activity,
-                v,
                 holder.binding?.dataModel
             )
         }

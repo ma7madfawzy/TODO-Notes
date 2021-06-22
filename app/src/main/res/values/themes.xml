@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.TempoNews" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.TodoNotes" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/colorPrimaryVariant</item>
 <!--        used to enable shared elements animation -->
@@ -9,17 +9,17 @@
 
     </style>
 
-    <style name="Theme.TempoNews.NoActionBar">
+    <style name="Theme.TodoNotes.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="AppTheme.Launcher" parent="Theme.TempoNews">
+    <style name="AppTheme.Launcher" parent="Theme.TodoNotes">
         <item name="android:windowBackground">@color/colorPrimaryVariant</item>
         <!-- Optional, on Android 5+ you can modify the colorPrimaryDark color to match the windowBackground color for further branding-->
         <item name="colorPrimaryDark">@android:color/white</item>
     </style>
 
-    <style name="Theme.TempoNews.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.TodoNotes.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="Theme.TempoNews.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.TodoNotes.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
