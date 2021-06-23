@@ -1,4 +1,4 @@
-# News App 🗞
+# TODO Notes App 🗞
 
 TODO Notes App is a simple notes app 🗞️ which uses ROOM to fetch top news headlines from the API with a reminder option using Alarm Manager. The main aim of this app is to be a leading example of how to build Modern Android applications for all Android Developers
 
@@ -20,15 +20,16 @@ The idea is to keep the app super simple while demonstrating new libraries and t
 
 News App uses libraries and tools used to build Modern Android application, mainly part of Android Jetpack 🚀
 
-- [Kotlin](https://kotlinlang.org/) first
+- [Kotlin](https://kotlinlang.org/) 
 - [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) and [Flow](https://kotlinlang.org/docs/reference/coroutines/flow.html) first
 - [Architecture components](https://developer.android.com/topic/libraries/architecture)
-- [Room](https://developer.android.com/training/data-storage/room)
-- [Alarm Manager](https://developer.android.com/reference/android/app/AlarmManager)
-- [Dagger 2](https://developer.android.com/training/dependency-injection) for dependency injection 🗡- [Retrofit](https://square.github.io/retrofit/)
-- [Picasso](https://square.github.io/picasso/)
-- [OkHttp](https://square.github.io/picasso/)
-- [Gson](https://square.github.io/okhttp/)
+- [Room](https://developer.android.com/training/data-storage/room) for local database
+- [Alarm Manager](https://developer.android.com/reference/android/app/AlarmManager)for setting reminders
+- [Dagger 2](https://developer.android.com/training/dependency-injection) for dependency injection 🗡
+- [Retrofit](https://square.github.io/retrofit/) for network requests
+- [Picasso](https://square.github.io/picasso/) for image loading
+- [OkHttp](https://square.github.io/okhttp/)
+- [Gson](https://github.com/google/gson)for object parsing
 - [Material Design](https://material.io/design) for user interface
 - [sdp](https://github.com/intuit/ssp) for multi screen dimensions
 - Other [Android Jetpack](https://developer.android.com/jetpack) components
@@ -42,4 +43,4 @@ The app uses MVVM [Model-View-ViewModel] architecture to have a unidirectional f
 
 
 
-### [Developed By Fawzy](https://www.linkedin.com/in/ma7madfawzy/) 
+### Developed By [Fawzy](https://www.linkedin.com/in/ma7madfawzy/) 
