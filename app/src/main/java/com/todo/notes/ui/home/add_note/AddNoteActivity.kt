@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.inputmethod.EditorInfo
-import android.widget.Toast
 import com.todo.notes.R
 import com.todo.notes.data.model.NoteDM
 import com.todo.notes.databinding.ActivityAddNoteBinding
@@ -72,11 +71,6 @@ class AddNoteActivity : BaseActivity<AddNoteViewModel, ActivityAddNoteBinding>()
     private fun onNoteCreated(hasReminder: Boolean) {
         //setting result code with RESULT_OK ells the starter there was a change in data so refresh is required
         handleReminder(hasReminder)
-        setResult(RESULT_OK)
-        Toast.makeText(
-            applicationContext, getString(R.string.note_added_successfully)
-                .replace("*", viewModel.model.title.toString()), Toast.LENGTH_LONG
-        ).show()
         HomeActivity.start(this)
     }
 
@@ -84,8 +78,7 @@ class AddNoteActivity : BaseActivity<AddNoteViewModel, ActivityAddNoteBinding>()
         hasReminder.let {
             AlarmManagerUtil.scheduleEvent(
                 applicationContext,
-                viewModel.model.getNoteDM(),
-                AlarmManagerUtil.getNotification(this, viewModel.model.title)
+                viewModel.model.getNoteDM()
             )
         }
     }

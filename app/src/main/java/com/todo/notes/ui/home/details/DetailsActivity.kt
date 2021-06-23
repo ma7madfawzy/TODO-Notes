@@ -22,7 +22,7 @@ class DetailsActivity : BaseActivity<DetailsViewModel, ActivityNoteDetailsBindin
     companion object {
         fun start(activity: Activity, v: View, dataModel: NoteDM?) {
             val bundle = Bundle()
-            bundle.putParcelable("dataModel", dataModel)
+            bundle.putParcelable(DetailsViewModel.DATA_MODEL, dataModel)
             activity.startActivity(v, DetailsActivity::class.java, bundle)
         }
     }

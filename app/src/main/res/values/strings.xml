@@ -36,4 +36,7 @@
     <string name="reminder">Reminder</string>
     <string name="sure_delete_note">Delete * ?</string>
     <string name="alarm_set">Reminder set on *</string>
+    <string name="reminders_channel_id">reminders_channel</string>
+    <string name="reminders_channel">Reminders Channel</string>
+    <string name="scheduled_notification">Scheduled Notification</string>
 </resources>

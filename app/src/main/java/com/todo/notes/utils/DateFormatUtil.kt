@@ -68,14 +68,12 @@ object DateFormatUtil {
 
     // @date format must be like 2021-05-08 07:13
     fun calendar(date: String?): Long? {
-        val sdf =
-            try {
-                return SimpleDateFormat("yyyy-MM-dd HH:mm").parse(date).time
-            } catch (e: ParseException) {
-                e.printStackTrace()
-            }
-
-        return null
+        return try {
+            SimpleDateFormat("yyyy-MM-dd HH:mm").parse(date).time
+        } catch (e: ParseException) {
+            e.printStackTrace()
+            null
+        }
     }
 
     fun calendar(year: Int, month: Int, dayOfMonth: Int, hourOfDay: Int, minute: Int): Calendar {

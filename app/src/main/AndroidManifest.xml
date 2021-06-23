@@ -31,7 +31,7 @@
         <activity
             android:name=".ui.home.add_note.AddNoteActivity"
             android:label="@string/add_new_note"
-            android:theme="@style/Theme.TodoNotes.NoActionBar"></activity>
+            android:theme="@style/Theme.TodoNotes.NoActionBar" />
 
         <receiver
             android:name=".broadcast.ReminderReceiver"
