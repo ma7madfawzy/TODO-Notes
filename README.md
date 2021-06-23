@@ -10,7 +10,7 @@ The codebase focuses 👓 on following key things:
 - Pagination
 - User Interface
 - ROOM
-_ Alarm Manager 
+- Alarm Manager 
 
 The idea is to keep the app super simple while demonstrating new libraries and tools which makes it easier to build high quality Android applications.
 
