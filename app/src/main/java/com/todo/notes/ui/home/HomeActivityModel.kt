@@ -7,6 +7,6 @@ import com.todo.notes.ui.base.BaseModel
  */
 
 class HomeActivityModel : BaseModel() {
-    var queryText: String? = ""
+    var queryText: String = ""
     var showAlert: Boolean? = false
 }

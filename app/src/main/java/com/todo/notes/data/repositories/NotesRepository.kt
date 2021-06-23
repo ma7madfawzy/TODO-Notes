@@ -19,7 +19,7 @@ class NotesRepository @Inject constructor(private val userDao: UserDao) {
     }
 
     //get all notes
-    fun fetchNotes() = userDao.fetchNotes()
+    private fun fetchNotes() = userDao.fetchNotes()
 
     //get all notes wit alike title or desc
     fun fetchNotes(searchedText: String) =

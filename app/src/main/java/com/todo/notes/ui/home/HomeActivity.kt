@@ -58,10 +58,6 @@ class HomeActivity : BaseActivity<HomeActivityViewModel, ActivityHomeBinding>() 
 
     private fun observeNotesData() {
         viewModel.notesData.observe(this) { result ->
-            if (result.isEmpty()) {
-                startAddNoteActivity()
-                finish()
-            } else
                 updateAdapter(result)
         }
     }

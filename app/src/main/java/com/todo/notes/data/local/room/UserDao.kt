@@ -24,7 +24,7 @@ interface UserDao {
 
     //get all notes with searched text title/desc
     @Transaction
-    @Query("SELECT * FROM user_notes WHERE title LIKE :searchText || description LIKE :searchText ")
+    @Query("SELECT * FROM user_notes WHERE title LIKE :searchText")
     fun fetchNotes(searchText: String): Flow<List<NoteDM>>
 
     //get single note inserted to room database
