@@ -59,7 +59,7 @@ class AddNoteActivity : BaseActivity<AddNoteViewModel, ActivityAddNoteBinding>()
     }
 
     private fun configActionDone() {
-        binding.phoneEt.setOnEditorActionListener { _, actionId, _ ->
+        binding.descEt.setOnEditorActionListener { _, actionId, _ ->
             when (actionId) {
                 EditorInfo.IME_ACTION_DONE ->
                     viewModel.onSaveNote()

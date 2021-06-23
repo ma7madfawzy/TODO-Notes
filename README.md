@@ -1,6 +1,6 @@
 # News App 🗞
 
-News App is a simple news app 🗞️ which uses [NewsAPI](https://newsapi.org/) to fetch top news headlines from the API. The main aim of this app is to be a leading example of how to build Modern Android applications for all Android Developers
+TODO Notes App is a simple notes app 🗞️ which uses ROOM to fetch top news headlines from the API with a reminder option using Alarm Manager. The main aim of this app is to be a leading example of how to build Modern Android applications for all Android Developers
 
 The codebase focuses 👓 on following key things:
 - Code structuring, style and comments 🗡
@@ -9,15 +9,12 @@ The codebase focuses 👓 on following key things:
 - MVVM 
 - Pagination
 - User Interface
+- ROOM
+_ Alarm Manager 
 
 The idea is to keep the app super simple while demonstrating new libraries and tools which makes it easier to build high quality Android applications.
 
-<img alt="NewsApp Home Page" height="450px" src="https://github.com/ma7madfawzy/NewsAPI/blob/master/screens/home.png" />
-
-<img alt="NewsApp Night Home Page" height="450px" src="https://github.com/ma7madfawzy/NewsAPI/blob/master/screens/dark_home.png" />
-
-<img alt="Article Details Night" height="450px" src="https://github.com/ma7madfawzy/NewsAPI/blob/master/screens/details_dark.png" />
-
+<img alt="Home Page" height="450px" src="https://github.com/ma7madfawzy/TODO-Notes/blob/master/screens/dark_home.png" />
 
 ## Libraries and tools 🛠
 
@@ -26,6 +23,8 @@ News App uses libraries and tools used to build Modern Android application, main
 - [Kotlin](https://kotlinlang.org/) first
 - [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) and [Flow](https://kotlinlang.org/docs/reference/coroutines/flow.html) first
 - [Architecture components](https://developer.android.com/topic/libraries/architecture)
+- [Room](https://developer.android.com/training/data-storage/room)
+- [Alarm Manager](https://developer.android.com/reference/android/app/AlarmManager)
 - [Dagger 2](https://developer.android.com/training/dependency-injection) for dependency injection 🗡- [Retrofit](https://square.github.io/retrofit/)
 - [Picasso](https://square.github.io/picasso/)
 - [OkHttp](https://square.github.io/picasso/)
@@ -33,7 +32,6 @@ News App uses libraries and tools used to build Modern Android application, main
 - [Material Design](https://material.io/design) for user interface
 - [sdp](https://github.com/intuit/ssp) for multi screen dimensions
 - Other [Android Jetpack](https://developer.android.com/jetpack) components
-
 
 ## Architecture
 

@@ -21,8 +21,7 @@ class ReminderReceiver : BroadcastReceiver() {
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        val notification: Notification? = ParcelableUtil
-            .unmarshall(intent.getByteArrayExtra(NOTIFICATION)!!,Notification.CREATOR)
+        val notification: Notification? = intent.getParcelableExtra(NOTIFICATION)
 
         val noteDM: NoteDM? = ParcelableUtil
             .unmarshall(intent.getByteArrayExtra(DetailsViewModel.DATA_MODEL)!!,NoteDM.CREATOR)

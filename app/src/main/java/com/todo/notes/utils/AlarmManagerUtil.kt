@@ -30,7 +30,7 @@ object AlarmManagerUtil {
                 context.getSystemService(DaggerAppCompatActivity.ALARM_SERVICE) as AlarmManager
             alarmManager.setExactAndAllowWhileIdle(
                 AlarmManager.RTC_WAKEUP,
-                System.currentTimeMillis() + 10 * 1_000L,
+                futureInMillis,
                 pendingIntent
             )
             log(context, noteDM)
@@ -40,10 +40,7 @@ object AlarmManagerUtil {
     private fun getIntent(context: Context, noteDM: NoteDM, notification: Notification): Intent {
         val notificationIntent = Intent(context, ReminderReceiver::class.java)
         notificationIntent.putExtra(DetailsViewModel.DATA_MODEL, ParcelableUtil.marshall(noteDM))
-        notificationIntent.putExtra(
-            ReminderReceiver.NOTIFICATION,
-            ParcelableUtil.marshall(notification)
-        )
+        notificationIntent.putExtra(ReminderReceiver.NOTIFICATION, notification)
         return notificationIntent
     }
 
@@ -57,10 +54,14 @@ object AlarmManagerUtil {
     private fun getNotification(context: Context, noteDM: NoteDM): Notification {
         handleChannel(context)
 
-        return Notification.Builder(context.applicationContext, context.getString(R.string.reminder))
+        return Notification.Builder(
+            context.applicationContext,
+            context.getString(R.string.reminder)
+        )
             .setContentTitle(context.getString(R.string.scheduled_notification))
             .setContentText(noteDM.title)
             .setSmallIcon(R.mipmap.ic_launcher)
+            .setContentIntent(getContentIntent(context, noteDM))
             .setAutoCancel(true)
             .setStyle(Notification.BigTextStyle().bigText(noteDM.description))
             .setChannelId(handleChannel(context))
@@ -70,14 +71,16 @@ object AlarmManagerUtil {
     private fun handleChannel(context: Context): String {
         val mNotificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        val channelId =  context.getString(R.string.reminders_channel_id)
-        val channelName =  context.getString(R.string.reminders_channel)
+        val channelId = context.getString(R.string.reminders_channel_id)
+        val channelName = context.getString(R.string.reminders_channel)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(channelId, channelName,
-                NotificationManager.IMPORTANCE_HIGH)
+            val channel = NotificationChannel(
+                channelId, channelName,
+                NotificationManager.IMPORTANCE_HIGH
+            )
             mNotificationManager.createNotificationChannel(channel)
         }
-        return  channelId
+        return channelId
     }
 
     private fun getContentIntent(context: Context, noteDM: NoteDM): PendingIntent? {

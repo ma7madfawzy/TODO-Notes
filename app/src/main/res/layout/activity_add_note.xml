@@ -70,7 +70,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:clipToPadding="false"
                 android:transitionName="@string/transition"
                 app:cardBackgroundColor="@color/card_color"
@@ -150,14 +150,15 @@
                         app:layout_constraintTop_toBottomOf="@id/note_title_holder">
 
                         <androidx.appcompat.widget.AppCompatEditText
-                            android:id="@+id/phone_et"
+                            android:id="@+id/desc_et"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="@dimen/medium"
                             android:layout_marginTop="@dimen/small"
                             android:layout_marginEnd="@dimen/medium"
                             android:hint="@string/note_desc"
-                            android:imeOptions="actionDone"
+                            android:textAlignment="viewStart"
+                            android:gravity="start"
                             android:inputType="textMultiLine"
                             android:minHeight="@dimen/add_note_min_height"
                             android:selectAllOnFocus="true"
